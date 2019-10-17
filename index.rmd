@@ -7,7 +7,11 @@ output:
     theme: cerulean
 ---
 
+You can find more about [me](about.html).
+
 # This is Jeff's awesome website
+
+You can learn 
 
 ![](https://media.giphy.com/media/drXGoW1iudhKw/giphy.gif)
 
