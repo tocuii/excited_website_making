@@ -10,3 +10,23 @@ output:
 # This is Jeff's awesome website
 
 ![](https://media.giphy.com/media/drXGoW1iudhKw/giphy.gif)
+
+
+I often use [google](google.com) to do data science.
+
+Here's my cat.
+
+![](cat.jpg)
+
+
+Here's a cutie
+
+![](./image/giraffe.jpg)
+
+
+
+
+
+
+
+
