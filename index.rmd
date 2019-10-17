@@ -12,7 +12,9 @@ output:
 ![](https://media.giphy.com/media/drXGoW1iudhKw/giphy.gif)
 
 
-I often use [google](https://www.google.com) to do data science.
+I often use [google](http://google.com) to do data science.
+
+# Lovely pics
 
 Here's my cat.
 
