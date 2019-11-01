@@ -6,7 +6,7 @@ output:
     vertical_layout: fill
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 library(flexdashboard)
 library(tidyverse)
 library(viridis)
@@ -45,7 +45,7 @@ Column {data-width=650}
 
 ### Mean score distribution
 
-```{r}
+```{r, echo = FALSE}
 rest_inspec %>% 
   group_by(boro, camis) %>% 
   summarise(mean_score = mean(score)) %>% 
@@ -64,7 +64,7 @@ Column {data-width=350}
 
 ### Number of inspections per day
 
-```{r}
+```{r, echo = FALSE}
 rest_inspec %>%
   group_by(inspection_date, boro) %>% 
   summarise(n = n()) %>%
@@ -79,7 +79,7 @@ rest_inspec %>%
 
 ### Scores of top 5 most common cuisine types
 
-```{r}
+```{r, echo = FALSE}
 pop_cuisine =
   rest_inspec %>% 
   count(cuisine_description, sort = TRUE) %>% 
