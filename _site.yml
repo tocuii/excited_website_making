@@ -1,20 +1,20 @@
-name: "My awesome website"
+name: "CUI Sitong"
 output_dir: "."
 navbar:
   title: "Home"
   right:
     - text: "About"
       href: about.html
-    - text: Example
+    - text: "Visualization"
       menu:
       - text: "plotly"
         href: plotly.html
       - text: "dashboard"
         href: dashboard.html
     - icon: fa-envelope fa-lg
-      href: mailto:<you@youremail.com>
+      href: mailto:<cui.sitong@columbia.edu>
     - icon: fa-github fa-lg
-      href: http://github.com/tocuii/
+      href: https://github.com/tocuii
 output:
   html_document:
-    theme: journal
+    theme: cosmo

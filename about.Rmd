@@ -1,11 +1,15 @@
 ---
-title: "about"
+title: "About"
 output: 
-  html_document:
-    toc: true
-    toc_float: true
+  html_document
 ---
 
 # About me
 
-My name is tocuii and I love skiing.
+I am currently a M.S. student in Biostatistics at the Mailman School of Public Health at Columbia.
+
+I graduated from the Polytechnic University of Hong Kong majoring in Optometry. I have worked as a registered optometrist for 3 years and encountered many interesting cases. I am curious about how to leverage data in guiding health related decisions and that's why I'm here.
+
+# About the site
+
+This site contains relevant projects for data science class. Find more about interactive plots at [plotly](plotly.html) and [dashboard](dashboard.html).

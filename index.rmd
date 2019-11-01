@@ -1,30 +1,13 @@
 ---
-title: "My awesome website"
+title: "CUI Sitong"
 output: 
   html_document:
     toc: true
-    toc_float: true
 ---
 
-You can find more about [me](about.html).
+![](./image/snow.jpg)
 
-# This is tocuii's awesome website
-
-![](https://media.giphy.com/media/drXGoW1iudhKw/giphy.gif)
-
-
-I often use [google](http://google.com) to do data science.
-
-# Lovely pics
-
-Here's my cat.
-
-![](cat.jpg)
-
-
-Here's a cutie
-
-![](./image/giraffe.jpg)
+Hi! This is CUI Sitong. I love snowy season and skiing. You can find more about [me and the site](about.html).
 
 
 
