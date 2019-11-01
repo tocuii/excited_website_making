@@ -8,63 +8,92 @@ output:
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
-
 library(tidyverse)
 library(viridis)
 library(p8105.datasets)
 library(plotly)
 
+knitr::opts_chunk$set(
+	echo = TRUE,
+	warning = FALSE,
+	fig.width = 8, 
+  fig.height = 6,
+  out.width = "90%"
+)
+
+options(
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis"
+)
+
+scale_colour_discrete = scale_colour_viridis_d
+scale_fill_discrete = scale_fill_viridis_d
+
+theme_set(theme_minimal() + theme(legend.position = "bottom"))
+
 set.seed(1)
 
-data(nyc_airbnb)
-nyc_airbnb = 
-  nyc_airbnb %>% 
-  mutate(rating = review_scores_location / 2) %>%
-  select(
-    neighbourhood_group, neighbourhood, rating, price, room_type, lat, long) %>%
-  filter(
-    !is.na(rating), 
-    neighbourhood_group == "Manhattan",
-    room_type == "Entire home/apt",
-    price %in% 100:500)  %>% 
-  sample_n(5000)
+data("rest_inspec")
+rest_inspec = rest_inspec %>% 
+  filter(inspection_date > "1900-01-01",
+         boro != "Missing") %>% 
+  drop_na(score)
 ```
 
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Chart A
+### Mean score distribution
 
 ```{r}
-nyc_airbnb %>% 
-  plot_ly(x = ~lat, y = ~long, type = "scatter", mode = "markers",
-          color = ~price, alpha = .5)
+rest_inspec %>% 
+  group_by(boro, camis) %>% 
+  summarise(mean_score = mean(score)) %>% 
+  plot_ly(x = ~mean_score, type = "histogram", 
+          color = ~fct_reorder(boro, desc(mean_score)), alpha = .5) %>% 
+  layout(
+    title = "Mean score distribution",
+    xaxis = list(title = "Mean score"),
+    yaxis = list(title = "Count"),
+    barmode = "overlay"
+  )
 ```
 
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Chart B
+### Number of inspections per day
 
 ```{r}
-common_neighborhoods =
-  nyc_airbnb %>% 
-  count(neighbourhood, sort = TRUE) %>% 
-  top_n(8) %>% 
-  select(neighbourhood)
-
-inner_join(nyc_airbnb, common_neighborhoods, by = "neighbourhood") %>% 
-  mutate(neighbourhood = fct_reorder(neighbourhood, price)) %>% 
-  plot_ly(y = ~price, color = ~neighbourhood, type = "box",
-          colors = "Set2")
+rest_inspec %>%
+  group_by(inspection_date, boro) %>% 
+  summarise(n = n()) %>%
+  plot_ly(x = ~inspection_date, y = ~n, type = "scatter", mode = "markers",
+          color = ~fct_reorder(boro, desc(n)), alpha = .5) %>% 
+  layout(
+    title = "Number of inspections per day",
+    xaxis = list(title = "Inspection date"),
+    yaxis = list(title = "Number of inspections")
+  )
 ```
 
-### Chart C
+### Scores of top 5 most common cuisine types
 
 ```{r}
-nyc_airbnb %>% 
-  count(neighbourhood) %>% 
-  mutate(neighbourhood = fct_reorder(neighbourhood, n)) %>% 
-  plot_ly(x = ~neighbourhood, y = ~n, color = ~neighbourhood, type = "bar")
+pop_cuisine =
+  rest_inspec %>% 
+  count(cuisine_description, sort = TRUE) %>% 
+  top_n(5) %>% 
+  select(cuisine_description)
+
+inner_join(rest_inspec, pop_cuisine, by = "cuisine_description") %>% 
+  plot_ly(y = ~score, x = ~boro, color = ~cuisine_description, 
+          type = "box", alpha = .5) %>% 
+  layout(
+    title = "Scores of top 5 most common cuisine types",
+    xaxis = list(title = "Boro"),
+    yaxis = list(title = "Score"),
+    boxmode = "group"
+  )
 ```
 
